@@ -107,7 +107,7 @@ public partial class LibrosDbContext : DbContext
             entity.HasKey(e => e.Idcategoria).HasName("Categoria_pkey");
 
             entity.Property(e => e.Idcategoria)
-                .ValueGeneratedNever()
+                .UseIdentityAlwaysColumn()
                 .HasColumnName("idcategoria");
             entity.Property(e => e.Nombrecategoria)
                 .HasMaxLength(255)
@@ -121,7 +121,7 @@ public partial class LibrosDbContext : DbContext
             entity.ToTable("Libro");
 
             entity.Property(e => e.Idlibro)
-                .ValueGeneratedNever()
+                .UseIdentityAlwaysColumn()
                 .HasColumnName("idlibro");
             entity.Property(e => e.Autorlibro)
                 .HasMaxLength(255)
@@ -147,7 +147,7 @@ public partial class LibrosDbContext : DbContext
             entity.ToTable("Resena");
 
             entity.Property(e => e.Idresena)
-                .ValueGeneratedNever()
+                .UseIdentityAlwaysColumn()
                 .HasColumnName("idresena");
             entity.Property(e => e.Calificacionresena).HasColumnName("calificacionresena");
             entity.Property(e => e.Fecharesena).HasColumnName("fecharesena");
