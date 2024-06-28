@@ -1,122 +1,90 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using ApiLibros.Areas.Identity.Data;
+using ApiLibros.Data;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using ApiLibros.ContextDB;
-using ApiLibros.Models.Identity;
 
 namespace ApiLibros.Controllers.Identity
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/{action}")]
     [ApiController]
     public class AspNetUsersController : ControllerBase
     {
-        private readonly LibrosDbContext _context;
+        private readonly ApiLibrosContext _context;
+        private readonly UserManager<ApiLibrosUser> _userManager;
+        private readonly IUserStore<ApiLibrosUser> _userStore;
+        private readonly IUserEmailStore<ApiLibrosUser> _emailStore;
+        private readonly SignInManager<ApiLibrosUser> _signInManager;
 
-        public AspNetUsersController(LibrosDbContext context)
+        public AspNetUsersController(ApiLibrosContext context,
+            UserManager<ApiLibrosUser> userManager,
+            IUserStore<ApiLibrosUser> userStore,
+            SignInManager<ApiLibrosUser> signInManager)
         {
+            _userManager = userManager;
             _context = context;
+            _userStore = userStore;
+            _emailStore = GetEmailStore();
+            _signInManager = signInManager;
         }
 
-        // GET: api/AspNetUsers
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<AspNetUser>>> GetAspNetUsers()
-        {
-            return await _context.AspNetUsers.ToListAsync();
-        }
-
-        // GET: api/AspNetUsers/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<AspNetUser>> GetAspNetUser(string id)
-        {
-            var aspNetUser = await _context.AspNetUsers.FindAsync(id);
-
-            if (aspNetUser == null)
-            {
-                return NotFound();
-            }
-
-            return aspNetUser;
-        }
-
-        // PUT: api/AspNetUsers/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutAspNetUser(string id, AspNetUser aspNetUser)
-        {
-            if (id != aspNetUser.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(aspNetUser).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!AspNetUserExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
-
-        // POST: api/AspNetUsers
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        
         [HttpPost]
-        public async Task<ActionResult<AspNetUser>> PostAspNetUser([FromBody] AspNetUser aspNetUser)
+        public async Task<ActionResult<ApiLibrosUser>> PostAspNetUser([FromBody] ApiLibrosUser aspNetUser)
         {
-            _context.AspNetUsers.Add(aspNetUser);
+            var user = CreateUser();
+
+            await _userStore.SetUserNameAsync(user, aspNetUser.UserName, CancellationToken.None);
+            await _emailStore.SetEmailAsync(user, aspNetUser.Email, CancellationToken.None);
+            var result = await _userManager.CreateAsync(user, aspNetUser.PasswordHash);
+
+            if (result.Succeeded)
+            {
+                return Ok(user);
+            }
+            return Conflict(result.Errors.First().Code + " --- " + result.Errors.First().Description);
+
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> PostLogin(string userName, string password)
+        {
+            var result = await _signInManager.PasswordSignInAsync(userName, password, isPersistent:false, lockoutOnFailure: false);
+            if (result.Succeeded)
+            {
+                return Ok();
+            }
+            return BadRequest();
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> PostLogOut()
+        {
+            await _signInManager.SignOutAsync();
+            return Ok();
+        }
+
+        
+        private ApiLibrosUser CreateUser()
+        {
             try
             {
-                await _context.SaveChangesAsync();
+                return Activator.CreateInstance<ApiLibrosUser>();
             }
-            catch (DbUpdateException)
+            catch
             {
-                if (AspNetUserExists(aspNetUser.Id))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
+                throw new InvalidOperationException($"Can't create an instance of '{nameof(IdentityUser)}'. " +
+                    $"Ensure that '{nameof(ApiLibrosUser)}' is not an abstract class and has a parameterless constructor, or alternatively " +
+                    $"override the register page in /Areas/Identity/Pages/Account/Register.cshtml");
             }
-
-            return CreatedAtAction("GetAspNetUser", new { id = aspNetUser.Id }, aspNetUser);
         }
 
-        // DELETE: api/AspNetUsers/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteAspNetUser(string id)
+        private IUserEmailStore<ApiLibrosUser> GetEmailStore()
         {
-            var aspNetUser = await _context.AspNetUsers.FindAsync(id);
-            if (aspNetUser == null)
+            if (!_userManager.SupportsUserEmail)
             {
-                return NotFound();
+                throw new NotSupportedException("The default UI requires a user store with email support.");
             }
-
-            _context.AspNetUsers.Remove(aspNetUser);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }
-
-        private bool AspNetUserExists(string id)
-        {
-            return _context.AspNetUsers.Any(e => e.Id == id);
+            return (IUserEmailStore<ApiLibrosUser>)_userStore;
         }
     }
 }
