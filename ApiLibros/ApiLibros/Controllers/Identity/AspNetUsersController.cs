@@ -2,6 +2,8 @@
 using ApiLibros.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.WebUtilities;
+using System.Text;
 
 namespace ApiLibros.Controllers.Identity
 {
@@ -39,7 +41,15 @@ namespace ApiLibros.Controllers.Identity
 
             if (result.Succeeded)
             {
-                return Ok(user);
+                var userId = await _userManager.GetUserIdAsync(user);
+                var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                var result1 = await _userManager.ConfirmEmailAsync(user, code);
+                if (result1.Succeeded)
+                {
+                    {
+                        return Ok(user);
+                    }
+                }
             }
             return Conflict(result.Errors.First().Code + " --- " + result.Errors.First().Description);
 
