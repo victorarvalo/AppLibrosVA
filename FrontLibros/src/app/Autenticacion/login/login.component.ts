@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginServiceService } from '../Services/login/login.service.service';
 import { Router } from '@angular/router';
-import { AspNetUserData } from './../../AspNetUserData.Service'
+import { SessionStorageService } from 'src/app/Storage/Sesion-Storage.Service';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit{
   password:any = "";
   constructor(private _loginService: LoginServiceService,
     private router: Router,
-    private aspNetUserData: AspNetUserData){
+    private _sessionStorageService: SessionStorageService){
   }
 
   ngOnInit(){
@@ -25,8 +25,8 @@ export class LoginComponent implements OnInit{
     this._loginService.GetLogin(this.email, this.password).subscribe(
       data =>{
         if(data.status == 200){
-          console.log('login ok');
-          this.aspNetUserData.updateAspNetUser(this.email);
+          this._sessionStorageService.setItem(this.email,this.email);
+          window.location.reload();
           this.router.navigate(['register']);
         }
       },

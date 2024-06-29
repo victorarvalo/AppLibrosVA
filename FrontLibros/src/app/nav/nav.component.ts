@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AspNetUserData } from '../AspNetUserData.Service';
 import { LogoutServiceService } from '../Autenticacion/Services/logout/logout.service.service';
 import { Router } from '@angular/router';
+import { SessionStorageService } from '../Storage/Sesion-Storage.Service';
 
 @Component({
   selector: 'app-nav',
@@ -11,16 +11,25 @@ import { Router } from '@angular/router';
 export class NavComponent implements OnInit {
 
 
-  aspNetUserNav: any
-  private visible: any;
+  aspNetUserNav: any;
+
+
   ngOnInit(): void {
-    this.aspNetUserNav = this.aspNetUserData.aspNetUserValue$;
-    this.visible = true;
+    const lenghtSession = this._sessionStorageService.length;
+    if(lenghtSession>0){
+      const firstKey = this._sessionStorageService.key(0);
+      const emailUser = this._sessionStorageService.getItem<string>(firstKey!);
+      this.aspNetUserNav = emailUser;
+    }
+    else{
+      this.aspNetUserNav = '';
+    }
   }
 
-  constructor(private aspNetUserData: AspNetUserData,
+  constructor(
     private _logoutService: LogoutServiceService,
-    private router: Router
+    private router: Router,
+    private _sessionStorageService: SessionStorageService
   ){
 
   }
@@ -29,8 +38,8 @@ export class NavComponent implements OnInit {
       this._logoutService.GetLogOut().subscribe(
         data=>{
           if(data.status == 200){
-            console.log('logout ok');
-            this.aspNetUserNav = '';
+            this._sessionStorageService.clear();
+            window.location.reload();
             this.router.navigate(['login']);
           }
       },
