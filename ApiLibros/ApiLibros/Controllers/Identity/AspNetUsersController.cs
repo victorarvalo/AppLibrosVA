@@ -56,7 +56,7 @@ namespace ApiLibros.Controllers.Identity
         }
 
         [HttpGet]
-        public async Task<ActionResult> PostLogin(string userName, string password)
+        public async Task<ActionResult> GetLogin(string userName, string password)
         {
             var result = await _signInManager.PasswordSignInAsync(userName, password, isPersistent:false, lockoutOnFailure: false);
             if (result.Succeeded)
@@ -67,7 +67,7 @@ namespace ApiLibros.Controllers.Identity
         }
 
         [HttpGet]
-        public async Task<ActionResult> PostLogOut()
+        public async Task<ActionResult> GetLogOut()
         {
             await _signInManager.SignOutAsync();
             return Ok();

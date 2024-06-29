@@ -14,13 +14,17 @@ builder.Services.AddDefaultIdentity<ApiLibrosUser>(options =>
     .AddEntityFrameworkStores<ApiLibrosContext>();
 
 // Add services to the container.
+builder.Services.AddCors(options => options.AddPolicy("AllowWebApp",
+    builder => builder.AllowAnyOrigin()
+        .AllowAnyHeader()
+        .AllowAnyMethod()));
 
 builder.Services.AddControllers();
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-
+app.UseCors("AllowWebApp");
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
