@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using ApiLibros.Models.Library.Category;
+using ApiLibros.Models.Library.Resenas;
 
-namespace ApiLibros.Models.Library;
+
+namespace ApiLibros.Models.Library.Libros;
 
 public partial class Libro
 {

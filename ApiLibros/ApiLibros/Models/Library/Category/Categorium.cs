@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using ApiLibros.Models.Library.Libros;
 
-namespace ApiLibros.Models.Library;
+namespace ApiLibros.Models.Library.Category;
 
 public partial class Categorium
 {

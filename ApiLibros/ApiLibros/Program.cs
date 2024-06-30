@@ -1,5 +1,8 @@
 using ApiLibros.Areas.Identity.Data;
 using ApiLibros.Data;
+using ApiLibros.Mappings;
+using AutoMapper;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,8 +19,10 @@ builder.Services.AddDefaultIdentity<ApiLibrosUser>(options =>
 // Add services to the container.
 builder.Services.AddCors(options => options.AddPolicy("AllowWebApp",
     builder => builder.AllowAnyOrigin()
-        .AllowAnyHeader()
+    .AllowAnyHeader()
         .AllowAnyMethod()));
+
+builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 builder.Services.AddControllers();
 

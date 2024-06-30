@@ -1,5 +1,7 @@
 ﻿using ApiLibros.Areas.Identity.Data;
-using ApiLibros.Models.Library;
+using ApiLibros.Models.Library.Category;
+using ApiLibros.Models.Library.Libros;
+using ApiLibros.Models.Library.Resenas;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
