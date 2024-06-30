@@ -9,5 +9,8 @@
         public int Calificacionresena { get; set; }
 
         public DateOnly Fecharesena { get; set; }
+        public string? Descripcionresena { get; set; }
+
+        public string? Aspnetuser { get; set; }
     }
 }

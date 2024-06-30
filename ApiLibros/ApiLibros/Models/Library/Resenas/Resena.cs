@@ -14,5 +14,9 @@ public partial class Resena
 
     public DateOnly Fecharesena { get; set; }
 
+    public string? Descripcionresena { get; set; }
+
+    public string? Aspnetuser { get; set; }
+
     public virtual Libro IdlibroNavigation { get; set; } = null!;
 }

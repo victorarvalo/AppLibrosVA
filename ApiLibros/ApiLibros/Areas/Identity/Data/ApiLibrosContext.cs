@@ -77,7 +77,12 @@ public class ApiLibrosContext : IdentityDbContext<ApiLibrosUser>
             entity.Property(e => e.Calificacionresena).HasColumnName("calificacionresena");
             entity.Property(e => e.Fecharesena).HasColumnName("fecharesena");
             entity.Property(e => e.Idlibro).HasColumnName("idlibro");
-
+            entity.Property(e => e.Descripcionresena)
+                .HasMaxLength(256)
+                .HasColumnName("descripcionresena");
+            entity.Property(e => e.Aspnetuser)
+                .HasMaxLength(256)
+                .HasColumnName("aspnetuser");
             entity.HasOne(d => d.IdlibroNavigation).WithMany(p => p.Resenas)
                 .HasForeignKey(d => d.Idlibro)
                 .OnDelete(DeleteBehavior.ClientSetNull)
