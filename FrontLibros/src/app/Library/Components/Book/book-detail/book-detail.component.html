@@ -1,0 +1,30 @@
+<div class="container" style="width: 80%; border-color: blue; border: 10px;">
+  <h2 class=" d-flex justify-content-center">Detalles {{bookLocal.titulolibro}}</h2>
+  <div class=" d-flex justify-content-center">
+    <label>Titulo: </label>
+    <label> {{bookLocal.titulolibro}}</label>
+  </div>
+  <div class=" d-flex justify-content-center">
+    <label>Autor: </label>
+    <label> {{bookLocal.autorlibro}}</label>
+  </div>
+  <div class=" d-flex justify-content-center">
+    <label>Categoria: </label>
+    <label>{{bookLocal.idcategoriaNavigation.nombrecategoria}}</label>
+  </div>
+  <div class=" d-flex justify-content-center">
+    <label>Resumen: </label>
+    <label> {{bookLocal.resumenlibro}}</label>
+  </div>
+</div>
+<div class="container" style="width: 80%;">
+  <h2 class=" d-flex justify-content-center">Reseñas</h2>
+  <div *ngFor="let resena of resenalocal">
+    <div >
+      <label>Descripción: {{resena.descripcionresena}}</label><br/>
+      <label>Fecha: {{resena.fecharesena | date}}</label><br/>
+      <label>Calificación: {{resena.calificacionresena}}</label><br/>
+      <label>Usuario: {{resena.aspnetuser}}</label><br/>
+      </div><br/>
+  </div>
+</div>

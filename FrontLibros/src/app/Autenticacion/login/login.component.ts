@@ -26,8 +26,11 @@ export class LoginComponent implements OnInit{
       data =>{
         if(data.status == 200){
           this._sessionStorageService.setItem(this.email,this.email);
-          window.location.reload();
-          this.router.navigate(['register']);
+          this.router.navigate(['nav'])
+            .then(() => {
+              window.location.reload();
+            });
+          this.router.navigate(['booklist']);
         }
       },
       error=>{

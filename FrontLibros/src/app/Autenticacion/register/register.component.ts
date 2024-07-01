@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { RegisterServiceService } from '../Services/register/register.service.service';
 import {Router} from '@angular/router'
 
