@@ -56,6 +56,7 @@ namespace ApiLibros.Controllers.Lybrary
         public async Task<ActionResult<List<DTOResena>>> GetResenaByBookId(int id)
         {
             var resenas = await _context.Resenas.Where(e => e.Idlibro.Equals(id)).ToListAsync();
+            resenas = resenas.OrderByDescending(x => x.Fecharesena) .ToList();
             //Map resena to DTOResena
             var dtoResena = _mapper.Map<List<DTOResena>>(resenas);
             return Ok(dtoResena);
