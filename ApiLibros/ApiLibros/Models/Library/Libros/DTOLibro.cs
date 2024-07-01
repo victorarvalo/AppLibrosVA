@@ -1,4 +1,6 @@
-﻿namespace ApiLibros.Models.Library.Libros
+﻿using ApiLibros.Models.Library.Category;
+
+namespace ApiLibros.Models.Library.Libros
 {
     public class DTOLibro
     {
@@ -11,5 +13,6 @@
         public int Idcategoria { get; set; }
 
         public string? Resumenlibro { get; set; }
+        public virtual DTOCategory IdcategoriaNavigation { get; set; }
     }
 }

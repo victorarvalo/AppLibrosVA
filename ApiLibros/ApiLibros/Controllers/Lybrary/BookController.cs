@@ -23,7 +23,7 @@ namespace ApiLibros.Controllers.Lybrary
         [HttpGet]
         public async Task<ActionResult<IEnumerable<DTOLibro>>> GetBooks()
         {
-            var libros = await _context.Libros.ToListAsync();
+            var libros = await _context.Libros.Include("IdcategoriaNavigation").ToListAsync();
             //Map Libro to DTOLibro
             var dtoLibros = _mapper.Map<IEnumerable<DTOLibro>>(libros);
             return Ok(dtoLibros);
@@ -33,7 +33,7 @@ namespace ApiLibros.Controllers.Lybrary
         [HttpGet("{id}")]
         public async Task<ActionResult<DTOLibro>> GetBookById(int id)
         {
-            var libro = await _context.Libros.FindAsync(id);
+            var libro = _context.Libros.Include("IdcategoriaNavigation").Where(x => x.Idlibro.Equals(id)).First();
 
             if (libro == null)
             {

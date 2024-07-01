@@ -51,6 +51,16 @@ namespace ApiLibros.Controllers.Lybrary
             return dtoResena;
         }
 
+        // GET: api/Resenas/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<List<DTOResena>>> GetResenaByBookId(int id)
+        {
+            var resenas = await _context.Resenas.Where(e => e.Idlibro.Equals(id)).ToListAsync();
+            //Map resena to DTOResena
+            var dtoResena = _mapper.Map<List<DTOResena>>(resenas);
+            return Ok(dtoResena);
+        }
+
         // PUT: api/Resenas/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
