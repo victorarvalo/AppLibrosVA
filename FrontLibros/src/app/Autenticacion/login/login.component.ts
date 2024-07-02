@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit{
             .then(() => {
               window.location.reload();
             });
-          this.router.navigate(['app/Library/Components/Book/list-books']);
+          this.router.navigate(['list-books']);
         }
       },
       error=>{

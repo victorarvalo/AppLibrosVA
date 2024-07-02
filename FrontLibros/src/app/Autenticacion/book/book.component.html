@@ -1,0 +1,16 @@
+<div class="container" style="width: 80%;" (click)="showDetails()">
+  <h2 class=" d-flex justify-content-center">Detalles {{bookLocal.titulolibro}}</h2>
+  <div class=" d-flex justify-content-center">
+    <label>Titulo: </label>
+    <label> {{bookLocal.titulolibro}}</label>
+  </div>
+  <div class=" d-flex justify-content-center">
+    <label>Autor: </label>
+    <label> {{bookLocal.autorlibro}}</label>
+  </div>
+  <div class=" d-flex justify-content-center">
+    <label>Categoria: </label>
+    <label>{{bookLocal.idcategoriaNavigation.nombrecategoria}}</label>
+  </div>
+</div>
+
