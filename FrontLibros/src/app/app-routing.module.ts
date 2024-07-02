@@ -12,7 +12,7 @@ const routes: Routes = [
   {path:'nav',component:NavComponent},
   {path:'login',component:LoginComponent},
   {path:'register',component:RegisterComponent},
-  {path:'booklist',component:ListBooksComponent},
+  {path:'app/Library/Components/Book/list-books',component:ListBooksComponent},
   {path:'book',component:BookComponent},
   {path: 'bookdetails', component:BookDetailComponent},
   {path: 'createresena', component: CreateResenaComponent}
