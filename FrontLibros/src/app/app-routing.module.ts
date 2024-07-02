@@ -13,7 +13,7 @@ const routes: Routes = [
   {path:'nav',component:NavComponent},
   {path:'login',component:LoginComponent},
   {path:'register',component:RegisterComponent},
-  {path:'list-books',component:ListBooksComponent},
+  {path:'booklist',component:ListBooksComponent},
   {path:'book',component:BookComponent},
   {path: 'bookdetails', component:BookDetailComponent},
   {path: 'createresena', component: CreateResenaComponent}
