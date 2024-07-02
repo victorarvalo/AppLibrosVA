@@ -43,8 +43,7 @@ export class NavComponent implements OnInit {
             .then(() => {
               window.location.reload();
             });
-            this.router.navigate(['login']);
-
+            this.router.navigateByUrl('');
           }
       },
     error=>{
