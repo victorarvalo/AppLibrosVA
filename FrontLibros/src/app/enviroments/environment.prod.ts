@@ -1,4 +1,4 @@
 export const environment = {
     production: true,
-    myAppUrl : "libraryapicontrol.azurewebsites.net"
+    myAppUrl : "https://libraryapicontrol.azurewebsites.net/"
   };
