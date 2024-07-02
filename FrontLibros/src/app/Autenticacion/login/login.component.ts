@@ -26,11 +26,11 @@ export class LoginComponent implements OnInit{
       data =>{
         if(data.status == 200){
           this._sessionStorageService.setItem(this.email,this.email);
-          this.router.navigate(['nav'])
-            .then(() => {
-              window.location.reload();
-            });
-            this.router.navigateByUrl('booklist');
+          // this.router.navigate(['nav'])
+          //   .then(() => {
+          //     window.location.reload();
+          //   });
+            this.router.navigateByUrl('');
         }
       },
       error=>{
