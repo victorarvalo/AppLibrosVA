@@ -39,8 +39,12 @@ export class NavComponent implements OnInit {
         data=>{
           if(data.status == 200){
             this._sessionStorageService.clear();
-            window.location.reload();
+            this.router.navigate(['nav'])
+            .then(() => {
+              window.location.reload();
+            });
             this.router.navigateByUrl('login');
+
           }
       },
     error=>{
