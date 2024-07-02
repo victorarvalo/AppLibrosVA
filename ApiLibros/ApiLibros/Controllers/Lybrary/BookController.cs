@@ -93,7 +93,7 @@ namespace ApiLibros.Controllers.Lybrary
         // POST: api/Book
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<DTOLibro>> PostBook([FromBody] DTOLibro librodto)
+        public async Task<ActionResult<DTOLibro>> PostBook([FromBody] DTOLibroPost librodto)
         {
             //Map DTOLibro to Libro
             var libro = _mapper.Map<Libro>(librodto);
@@ -102,9 +102,15 @@ namespace ApiLibros.Controllers.Lybrary
             if (! CategoryExist(libro.Idcategoria)){
                 return BadRequest($"La categoria con id: {libro.Idcategoria} no existe");
             }
-
-            _context.Libros.Add(libro);
-            await _context.SaveChangesAsync();
+            try
+            {
+                _context.Libros.Add(libro);
+                await _context.SaveChangesAsync();
+            }catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            
 
             //Map Libro to DTOLibro
             var dtoLibro = _mapper.Map<DTOLibro>(libro);

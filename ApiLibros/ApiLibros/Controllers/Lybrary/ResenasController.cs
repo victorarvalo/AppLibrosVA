@@ -118,10 +118,16 @@ namespace ApiLibros.Controllers.Lybrary
             }
 
             //Map DTOResena to resena
-            var resena = _mapper.Map<Resena>(resenadto);            
-
-            _context.Resenas.Add(resena);
-            await _context.SaveChangesAsync();
+            var resena = _mapper.Map<Resena>(resenadto);
+            try
+            {
+                _context.Resenas.Add(resena);
+                await _context.SaveChangesAsync();
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
 
             //Map resena to DTOResena
             var dtoResena = _mapper.Map<DTOResena>(resena);

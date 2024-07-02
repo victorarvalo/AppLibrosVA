@@ -16,6 +16,8 @@ namespace ApiLibros.Mappings
             //Libro
             CreateMap<DTOLibro, Libro>();
             CreateMap<Libro, DTOLibro>();
+            CreateMap<DTOLibroPost, Libro>();
+            CreateMap<Libro, DTOLibroPost>();
 
             //Reseña
             CreateMap<DTOResena, Resena>();
