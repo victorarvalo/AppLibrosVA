@@ -62,9 +62,10 @@ export class CreateResenaComponent implements OnInit{
         console.log(error);
       }
     );
-    this.route.navigateByUrl('bookdetails', {
-      state: {book: this.bookLocal}
-    });
+    // this.route.navigateByUrl('bookdetails', {
+    //   state: {book: this.bookLocal}
+    // });
+    this.route.navigateByUrl('booklist');
   }
 
   getDateFormat(): string{
