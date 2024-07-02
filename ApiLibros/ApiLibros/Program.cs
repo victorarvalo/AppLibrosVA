@@ -28,6 +28,11 @@ builder.Services.AddControllers();
 
 var app = builder.Build();
 
+if (app.Environment.IsDevelopment())
+{
+    Console.WriteLine("Desarrollo");
+}
+
 // Configure the HTTP request pipeline.
 app.UseCors("AllowWebApp");
 app.UseHttpsRedirection();
