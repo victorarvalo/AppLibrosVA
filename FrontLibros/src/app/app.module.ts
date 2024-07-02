@@ -8,9 +8,9 @@ import { LoginComponent } from './Autenticacion/login/login.component';
 import { RegisterComponent } from './Autenticacion/register/register.component';
 import { FormsModule,ReactiveFormsModule  } from '@angular/forms';
 import { DetailCategoryComponent } from './Library/Components/Category/detail-category/detail-category.component'
-import { BookDetailComponent } from './Library/Components/Book/book-detail/book-detail.component';
-import { ListBooksComponent } from './Library/Components/Book/list-books/list-books.component';
-import { BookComponent } from './Library/Components/Book/book/book.component';
+import { BookDetailComponent } from './Autenticacion/book-detail/book-detail.component';
+import { ListBooksComponent } from './Autenticacion/list-books/list-books.component';
+import { BookComponent } from './Autenticacion/book/book.component';
 import { CreateResenaComponent } from './Library/Components/Resena/create.resena/create.resena.component';
 
 @NgModule({
