@@ -1,0 +1,25 @@
+<div class="container" style="width: 30%;">
+  <h2 class=" d-flex justify-content-center">Ingreso</h2>
+  <div class="form-floating mb-3  d-flex justify-content-center">
+      <input class="form-control" placeholder="name@example.com" type="text" [(ngModel)]="email"/>
+      <label class="form-label">Email</label>
+  </div>
+  <div class="form-floating mb-3  d-flex justify-content-center">
+      <input class="form-control" placeholder="password" type="password" [(ngModel)]="password"/>
+      <label class="form-label">Password</label>
+  </div>
+  <div>
+      <button class="w-100 btn btn-lg btn-primary  d-flex justify-content-center"
+      id="login-submit" type="submit" (click)="login()">Ingresar</button>
+  </div>
+  <div>
+    <br>
+      <p>
+          <a class="link-opacity-100  d-flex justify-content-center" [routerLink]="['./../register']">Registrarse como un usuario nuevo</a>
+      </p>
+  </div>
+  <div style="text-align: center;" [hidden]="visible">
+    <br>
+    <p style="color: red;">Error de email o contraseña</p>
+  </div>
+</div>

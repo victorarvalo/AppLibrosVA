@@ -1,0 +1,18 @@
+<div style="background-color: #f7f8f8;">
+  <div class="row" *ngIf="aspNetUserNav == '' ">
+      <div class="col"></div>
+      <div class="col"></div>
+      <div class="col"></div>
+      <div class="col d-flex justify-content-end">
+        <a class="link-opacity-100" [routerLink]="['login']">Login</a>
+      </div>
+  </div>
+  <div class="row" *ngIf="aspNetUserNav != '' ">
+    <div class="col"></div>
+    <div class="col"></div>
+    <div class="col">{{aspNetUserNav}}</div>
+    <div class="col d-flex justify-content-end">
+      <a class="link-opacity-100" (click)="logout()">Logout</a>
+    </div>
+</div>
+</div>
