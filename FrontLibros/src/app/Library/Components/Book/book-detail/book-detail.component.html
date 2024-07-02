@@ -16,7 +16,10 @@
     <label>Resumen: </label>
     <label> {{bookLocal.resumenlibro}}</label>
   </div>
-</div>
+</div><br/>
+<div class="d-flex justify-content-center">
+  <button class="btn btn-outline-primary" (click)="createResena()">Agregar Reseña</button>
+</div><br/>
 <div class="container" style="width: 80%;">
   <h2 class=" d-flex justify-content-center">Reseñas</h2>
   <div *ngFor="let resena of resenalocal">

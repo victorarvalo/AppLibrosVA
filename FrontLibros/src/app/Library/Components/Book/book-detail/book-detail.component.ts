@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { ResenaServiceService } from 'src/app/Library/Services/resena.service.service';
 
 @Component({
@@ -7,15 +7,13 @@ import { ResenaServiceService } from 'src/app/Library/Services/resena.service.se
   templateUrl: './book-detail.component.html',
   styleUrls: ['./book-detail.component.css']
 })
-export class BookDetailComponent implements OnInit {
-
-
+export class BookDetailComponent implements OnInit{
   @Input()
   bookLocal:any;
 
   resenalocal: any;
 
-  constructor(private route: ActivatedRoute, private router: Router,
+  constructor(private router: Router,
     private _resenaServiceService: ResenaServiceService
   ){
     this.bookLocal = (JSON.parse(
@@ -33,4 +31,9 @@ export class BookDetailComponent implements OnInit {
       }
     )
   }
+
+  createResena() {
+    this.router.navigateByUrl('createresena', {
+      state: {book: this.bookLocal}
+    })};
 }

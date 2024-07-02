@@ -6,6 +6,7 @@ import { RegisterComponent } from './Autenticacion/register/register.component';
 import { ListBooksComponent } from './Library/Components/Book/list-books/list-books.component';
 import { BookComponent } from './Library/Components/Book/book/book.component';
 import { BookDetailComponent } from './Library/Components/Book/book-detail/book-detail.component';
+import { CreateResenaComponent } from './Library/Components/Resena/create.resena/create.resena.component';
 
 const routes: Routes = [
   {path:'nav',component:NavComponent},
@@ -13,7 +14,8 @@ const routes: Routes = [
   {path:'register',component:RegisterComponent},
   {path:'booklist',component:ListBooksComponent},
   {path:'book',component:BookComponent},
-  {path: 'bookdetails', component:BookDetailComponent}
+  {path: 'bookdetails', component:BookDetailComponent},
+  {path: 'createresena', component: CreateResenaComponent}
 ];
 
 @NgModule({
