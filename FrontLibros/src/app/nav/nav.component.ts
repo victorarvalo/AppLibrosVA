@@ -40,7 +40,7 @@ export class NavComponent implements OnInit {
           if(data.status == 200){
             this._sessionStorageService.clear();
             window.location.reload();
-            this.router.navigate(['login']);
+            this.router.navigateByUrl('login');
           }
       },
     error=>{

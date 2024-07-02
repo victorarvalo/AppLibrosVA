@@ -7,6 +7,7 @@ import { ListBooksComponent } from './Autenticacion/list-books/list-books.compon
 import { BookComponent } from './Autenticacion/book/book.component';
 import { BookDetailComponent } from './Autenticacion/book-detail/book-detail.component';
 import { CreateResenaComponent } from './Library/Components/Resena/create.resena/create.resena.component';
+import { AppComponent } from './app.component';
 
 const routes: Routes = [
   {path:'nav',component:NavComponent},
